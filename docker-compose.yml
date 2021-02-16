@@ -1,0 +1,33 @@
+version: '3'
+services:
+  #Noalyss
+  noalyss:
+    container_name: noalyss-web
+    build: ./docker
+    image: docker-noalyss:7410
+    ports:
+      - "8080:80"
+    tty: true
+    stdin_open: true
+    restart: always
+  #PostgreSQL
+  noalyss-db:
+    container_name: noalyss-db
+    image: postgres:12.2
+    environment:
+      POSTGRES_DB: noalyss_sql
+      POSTGRES_USER: noalyss_sql
+      POSTGRES_PASSWORD: dany
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+  # Adminer 192.168.1.35:5432
+  adminer:
+    container_name: noalyss-adminer
+    image: adminer
+    restart: always
+    ports:
+      - "8083:8080"
