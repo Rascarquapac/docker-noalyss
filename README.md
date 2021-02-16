@@ -12,33 +12,38 @@ Noalyss is an open source accounting  tool based on a Postgresql server and a PH
 
 How to run this image 
 ------------------
-This image is based on the officiel PHP repository.
+This image is based on the official PHP repository,tag php7.4-apache (Debian buster-slim). It doesn't contain database. So you need to link it with a Postgres database container.
 
-**Important:**  This image don't contains database. So you need to link it with a database container.
+The following docker-compose.yml proposes a stand alone application including Postgresql and Adminer containers. 
+As such Noalyss is available on port 8080 of "localhost" and Adminer on port 8083. Passwords and ports can be adapted according to your choices.
 
-Let's use Docker Compose to integrate it with Postgresql and Adminer tool
-
-* Noalyss is available on port 8080 of your local host. You have to install the tool by runnning the installer at
-
-    https://localhost:8080/noalyss/html/install.php
-* Adminer is available on port 8083 where you have to configure the access
-    https://localhost:8083
-
-**Note:**
+#### Installing Noalyss ####
+ 
+1. Launch Noalyss client at http://localhost:8080/noalyss/html/install.php
+2. Follow the installation instructions. 
+    Default values for paths should be kept as is. 
+    Values for password, database should be adpated to your own docker-compose.yml definitions
+    Do not forget that following docker-compose.yml defines "noalyss-db" as the "Postgresql Server Adress"
+    The install.php file must be suppressed after ending configuration (see instructions)
+    At this step he postgresql database is running 
+    Create non admin user according to manual
+    Import previous folder's dumps or create a new folder
+#### Using Noalyss ####
+[Presentation](https://wiki.noalyss.eu/lib/exe/fetch.php?media=noalyss_presentation.pdf), [wiki](https://wiki.noalyss.eu/doku.php), [manuals](http://manuel-fr.noalyss.eu/), [demo site](http://demo.noalyss.eu/) and [videos](https://wiki.noalyss.eu/doku.php?id=tutoriel_video) are available.
+#### Configuring Adminer ####
+According to current docker-compose.yml file, Adminer is available at http://locahost:8083. You have to configure the access with the following values:
 * Adminer server: noalyss-db:5432
 * Adminer user: noalyss_sql
 * Adminer database: noalyss_sql
 
-
-Create docker-compose.yml file as following:
+Create docker-compose.yml is available on the [Github repository](https://github.com/Rascarquapac/docker-noalyss). The file looks like:
 
     version: '3'
     services:
       #Noalyss
       noalyss:
         container_name: noalyss-web
-        build: ./docker
-        image: docker-noalyss:7410
+        image: rascar/docker-noalyss:7410
         ports:
           - "8080:80"
         tty: true
