@@ -36,7 +36,7 @@ How to use Noalyss
 -------------
 [Presentation](https://wiki.noalyss.eu/lib/exe/fetch.php?media=noalyss_presentation.pdf), [wiki](https://wiki.noalyss.eu/doku.php), [manuals](http://manuel-fr.noalyss.eu/), [demo site](http://demo.noalyss.eu/) and [videos](https://wiki.noalyss.eu/doku.php?id=tutoriel_video) are available.
 
-How to onfigure Adminer
+How to configure Adminer
 -------------
 Adminer is not mandatory but helpful to develop plugins or understand Noalyss tables and requests. 
 
@@ -45,6 +45,8 @@ According to current docker-compose.yml file, Adminer is available at http://loc
 * Adminer user: noalyss_sql
 * Adminer database: noalyss_sql
 
+Docker compose template
+---------------
 The "docker-compose.yml" file is available on the [Github repository](https://github.com/Rascarquapac/docker-noalyss). The file looks like:
 
     version: '3'
