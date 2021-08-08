@@ -26,7 +26,7 @@ RUN apt-get update -y \
 ENV NOA_VERSION 7410
 
 # Get NOALYSS
-ADD https://github.com/Rascarquapac/docker-noalyss/blob/main/noalyss-${NOA_VERSION}.tar.gz  /tmp/noalyss.tar.gz
+ADD https://github.com/Rascarquapac/docker-noalyss/raw/main/noalyss-${NOA_VERSION}.tar.gz  /tmp/noalyss.tar.gz
 RUN tar -xzf /tmp/noalyss.tar.gz -C /tmp/ \
      && cd  /var/www/html \
      && cp -rvp /tmp/noalyss/ /var/www/html/ \
