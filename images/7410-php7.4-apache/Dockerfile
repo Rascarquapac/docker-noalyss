@@ -19,7 +19,7 @@ RUN apt-get update -y \
         libpq-dev \
         libonig-dev \
         libgmp-dev \
-        postgresql-client-11 \
+        postgresql-client-12 \
         unzip \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* \
