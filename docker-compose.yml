@@ -3,7 +3,7 @@ services:
   #Noalyss
   noalyss:
     container_name: noalyss-web
-    image: rascar/docker-noalyss:7410
+    image: rascar/docker-noalyss:9100
     ports:
       - "8080:80"
     tty: true
