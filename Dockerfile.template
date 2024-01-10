@@ -28,7 +28,7 @@ RUN apt-get update -y \
     && docker-php-ext-install bcmath gmp mbstring gettext zip gd xml \
     && mv ${PHP_INI_DIR}/php.ini-production ${PHP_INI_DIR}/php.ini
 
-ENV NOA_VERSION 7410
+ENV NOA_VERSION 9100
 
 # Get NOALYSS
 ADD https://github.com/Rascarquapac/docker-noalyss/raw/main/noalyss-${NOA_VERSION}.tar.gz  /tmp/noalyss.tar.gz
