@@ -4,6 +4,7 @@ Docker image for Noalyss based on PHP docker official images
 Supported tags
 -------
 * 7410-php 7.4-apache
+* 9100-php 7.4-apache
 
 What is Noalyss
 -------
@@ -11,26 +12,27 @@ Noalyss is an open source accounting  tool based on a Postgresql server and a PH
 
 How to run this image 
 ------------------
-This image is based on the official PHP repository,tag php7.4-apache (Debian buster-slim). It doesn't contain database. So you need to link it with a Postgres database. The following docker-compose.yml proposes a stand alone application including Postgresql and Adminer containers. 
-As such Noalyss is available on port 8080 of "localhost" and Adminer on port 8083. Passwords and ports can be adapted according to your choices.
+This image is based on the official PHP repository,tag php7.4-apache. The docker-compose.yml includes Postgresql, Adminer and Pgadmin4 containers. 
+As such Noalyss is available on port 8080 of "localhost", Adminer on port 8083, Pgamin4 on port 5050. Passwords and ports can be adapted according to your choices by editing the docker-compose.yml
 
 The installation is straightforward:
-1. If not already done (!), install the docker-compose tool on your host (i.e. Docker Desktop for Mac OS X)
-2. Copy the following docker-compose.yml in a target folder on your local host
-3. Run the command "docker-compose up -d" in a shell inside the target folder 
-4. Done !
+1. Install Docker Desktop (Mac OS X) or any docker-compose tool on your host.
+2. Download the docker-compose.yml and the Dockerfile inside a destination folder.
+3. cd inside the destination folder
+4. Run the command "docker build ." . It creates an docker image with PHP, postgres-client, Noalyss and its plugins
+5. Run the command "docker-compose up -d" in a shell inside the destination folder 
 
 How to Configure Noalyss
 ------------------- 
-1. Launch Noalyss client at http://localhost:8080/noalyss/html/install.php
+1. From your preferred browser go to the URL http://localhost:8080/noalyss/html/install.php
 2. Follow the installation instructions. 
-    Default values for paths should be kept as is. 
-    Values for password, database should be adpated to your own docker-compose.yml definitions
-    Do not forget that following docker-compose.yml defines "noalyss-db" as the "Postgresql Server Adress"
+    Values for password, database could be adapted by changing docker-compose.yml definitions
+    Do not forget that following docker-compose.yml defines "postgres" as the "Postgresql Server Adress"
     The install.php file must be suppressed after ending configuration (see instructions)
-    At this step he postgresql database is running 
-    Create non admin user according to manual
-    Import previous folder's dumps or create a new folder
+    At this step the postgresql database is running 
+    Create non admin user according to Noalyss manual
+    Import previous folder's dumps or create a new folder according to Noalyss manual
+    Configure Plugins accoridng to Noalyss manual
 
 How to use Noalyss
 -------------
@@ -44,41 +46,3 @@ According to current docker-compose.yml file, Adminer is available at http://loc
 * Adminer server: noalyss-db:5432
 * Adminer user: noalyss_sql
 * Adminer database: noalyss_sql
-
-Docker compose template
----------------
-The "docker-compose.yml" file is available on the [Github repository](https://github.com/Rascarquapac/docker-noalyss). The file looks like:
-
-    version: '3'
-    services:
-      #Noalyss
-      noalyss:
-        container_name: noalyss-web
-        image: rascar/docker-noalyss:7410
-        ports:
-          - "8080:80"
-        tty: true
-        stdin_open: true
-        restart: always
-      #PostgreSQL
-      noalyss-db:
-        container_name: noalyss-db
-        image: postgres:12.2
-        environment:
-          POSTGRES_DB: noalyss_sql
-          POSTGRES_USER: noalyss_sql
-          POSTGRES_PASSWORD: dany
-          PGDATA: /var/lib/postgresql/data
-        volumes:
-          - ./db-data:/var/lib/postgresql/data
-        ports:
-          - "5432:5432"
-        restart: always
-      # Adminer 192.168.1.35:5432
-      adminer:
-        container_name: noalyss-adminer
-        image: adminer
-        restart: always
-        ports:
-          - "8083:8080"
-
