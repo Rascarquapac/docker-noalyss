@@ -1,18 +1,20 @@
-version: '3'
+version: '3.9'
 services:
-  #Noalyss
-  noalyss:
-    container_name: noalyss-web
+  # Apache webserver service
+  web:
+    container_name: noa91php74
     image: rascar/docker-noalyss:9100
+    build:
+    volumes:
+    # Map port 8000 on the host to port 80 on the container 
     ports:
-      - "8080:80"
-    tty: true
-    stdin_open: true
-    restart: always
-  #PostgreSQL
-  noalyss-db:
-    container_name: noalyss-db
-    image: postgres:12.2
+      - 8080:80  
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:12.7
+    container_name: postgres127
     environment:
       POSTGRES_DB: noalyss_sql
       POSTGRES_USER: noalyss_sql
@@ -25,8 +27,31 @@ services:
     restart: always
   # Adminer 192.168.1.35:5432
   adminer:
-    container_name: noalyss-adminer
     image: adminer
+    container_name: adminer
     restart: always
     ports:
       - "8083:8080"
+    depends_on:
+      - postgres
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgdamin
+    environment:
+      # Default email for pgAdmin 4
+      PGADMIN_DEFAULT_EMAIL: thierry.nancy@gmail.com
+      # Password for accessing pgAdmin 4
+      PGADMIN_DEFAULT_PASSWORD: xylopho00
+    ports:
+      # Expose pgadmin on 5050 
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    restart: always
+volumes:
+  pgadmin_data:
+
+
