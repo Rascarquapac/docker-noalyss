@@ -3,10 +3,12 @@ services:
   # Apache webserver service
   web:
     container_name: noa91php74
-    image: rascar/docker-noalyss:9100
+    build:
+    # Dockerfile path
+      context: .
+      dockerfile: Dockerfile  
     build:
     volumes:
-    # Map port 8000 on the host to port 80 on the container 
     ports:
       - 8080:80  
     depends_on:
