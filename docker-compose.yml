@@ -3,7 +3,7 @@ services:
   # Apache webserver service
   web:
     container_name: noa91php74
-    image: rascar/docker-noalyss:9100
+    image: rascar/docker-noalyss:latest
     ## In case you need to build locally your image 
     #build:
     #  context: .
