@@ -3,8 +3,8 @@ Docker image for Noalyss based on PHP docker official images
 
 Supported tags
 -------
-* 7410-php 7.4-apache
-* 9100-php 7.4-apache
+* 7410
+* latest
 
 What is Noalyss
 -------
