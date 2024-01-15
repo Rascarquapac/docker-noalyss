@@ -3,12 +3,11 @@ services:
   # Apache webserver service
   web:
     container_name: noa91php74
-    build:
-    # Dockerfile path
-      context: .
-      dockerfile: Dockerfile  
-    build:
-    volumes:
+    image: rascar/docker-noalyss:9100
+    ## In case you need to build locally your image 
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile  
     ports:
       - 8080:80  
     depends_on:
