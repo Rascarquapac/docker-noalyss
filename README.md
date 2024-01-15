@@ -16,23 +16,21 @@ This image is based on the official PHP repository,tag php7.4-apache. The docker
 As such Noalyss is available on port 8080 of "localhost", Adminer on port 8083, Pgamin4 on port 5050. Passwords and ports can be adapted according to your choices by editing the docker-compose.yml
 
 The installation is straightforward:
-1. Install Docker Desktop (Mac OS X) or any docker-compose tool on your host.
-2. Download the docker-compose.yml and the Dockerfile inside a destination folder.
+1. Install, if not already existing, Docker Desktop (Mac OS X) or any docker-compose tool on your host.
+2. Download the docker-compose.yml inside a destination folder.
 3. cd inside the destination folder
-4. Run the command "docker build ." . It creates an docker image with PHP, postgres-client, Noalyss and its plugins
-5. Run the command "docker-compose up -d" in a shell inside the destination folder 
+4. Run the command "docker-compose up -d" in a shell inside the destination folder
+5. Done
+If another architecture (arm64 for example) is required (performance reasons) just build the image with the Dockerfile by commenting "Solution 1" and uncommenting "Solution 2". Same for the docker-compose.yml . 
 
 How to Configure Noalyss
 ------------------- 
-1. From your preferred browser go to the URL http://localhost:8080/noalyss/html/install.php
-2. Follow the installation instructions. 
-    Values for password, database could be adapted by changing docker-compose.yml definitions
-    Do not forget that following docker-compose.yml defines "postgres" as the "Postgresql Server Adress"
-    The install.php file must be suppressed after ending configuration (see instructions)
-    At this step the postgresql database is running 
-    Create non admin user according to Noalyss manual
-    Import previous folder's dumps or create a new folder according to Noalyss manual
-    Configure Plugins accoridng to Noalyss manual
+1. From your preferred browser go to the URL http://localhost:8080/noalyss/html/index.php
+2. Setup Noalyss (see Noalyss screnshot in the current github repository)
+3. Remarks:
+  - Values for password, database could be adapted by changing docker-compose.yml definitions
+  - Import previous folder's dumps or create a new folder according to Noalyss manual
+  - Configure Plugins accoridng to Noalyss manual
 
 How to use Noalyss
 -------------
